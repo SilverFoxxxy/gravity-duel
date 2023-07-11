@@ -1,0 +1,21 @@
+body {
+  text-align: center;
+  background: gray;
+}
+canvas {
+  display: block;
+  width: 90vw;
+  height: 45vw;
+  margin: auto;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  border: 1px solid black;
+  image-rendering: pixelated;
+}
+button {
+  display: block;
+  font-size: inherit;
+  margin: auto;
+  padding: 0.6em;
+}
