@@ -1,4 +1,6 @@
 
+const CELL_SZ = 16;
+
 function getDictValues(dict) {
     let values = [];
     for (const [key, value] of Object.entries(dict)) {
@@ -10,20 +12,26 @@ function getDictValues(dict) {
 var PLAYER_TEX_IDX;
 
 class SimpleAnimatedObject {
+    immortal = false;
+
+    alive = true;
+
     x;
     y;
     dx;
     dy;
 
     step_cnt = 0;
-    anim_step = 5;
+    anim_step = 4;
 
     anim_tex_idx = [];
 
     last_tex_idx = -1;
 
-    constructor(tex_idx, x0, y0, adx=0, ady=0, anim_cnt = 5) {
+    constructor(immortal, tex_idx, x0, y0, adx=0, ady=0, anim_cnt = 4) {
         // console.log("Dust create");
+        this.immortal = immortal;
+
         this.x = x0;
         this.y = y0;
         this.dx = adx;
@@ -34,23 +42,37 @@ class SimpleAnimatedObject {
 
     step() {
         // console.log("Dust step");
-        this.x += dx;
-        this.y += dy;
+        this.x += this.dx;
+        this.y += this.dy;
 
         this.step_cnt += 1;
 
-        if (this.last_tex_idx == this.anim_tex_idx.length - 1) {
-            return false;
-            // console.log("Dust die");
-        }
-        return true;
+        return this.alive;
+
+        // if (this.last_tex_idx == this.anim_tex_idx.length - 1) {
+        //     return false;
+        //     // console.log("Dust die");
+        // }
+        // return true;
     }
 
     getTexIdx() {
-        this.last_tex_idx = Math.floor(this.step_cnt / this.anim_step);
-        if (this.last_tex_idx >= this.anim_tex_idx.length) {
-            this.last_tex_idx = this.anim_tex_idx.length - 1;
+        // if ((this.anim_tex_idx.length) * this.anim_step <= this.step_cnt) {
+        //     this.dead = true;
+        // }
+
+        if (this.step_cnt >= this.anim_tex_idx.length * this.anim_step) {
+            if (this.immortal) {
+                this.step_cnt = 0;
+                this.last_tex_idx = 0;
+            } else {
+                this.alive = false;
+                this.last_tex_idx = this.anim_tex_idx.length - 1;
+            }
+        } else {
+            this.last_tex_idx = Math.floor(this.step_cnt / this.anim_step);
         }
+
         // console.log(this.last_tex_idx, this.anim_tex_idx[this.last_tex_idx]);
         return this.anim_tex_idx[this.last_tex_idx];
     }
@@ -62,7 +84,19 @@ class SimpleAnimatedObject {
 
 function createDustAnim(x0, y0) {
     tex_idx = [TEX_IDX.dust_00, TEX_IDX.dust_01, TEX_IDX.dust_02, TEX_IDX.dust_03];
-    let dust_anim = new SimpleAnimatedObject(tex_idx, x0, y0);
+    let dust_anim = new SimpleAnimatedObject(false, tex_idx, x0, y0);
+    return dust_anim;
+}
+
+function createBush(x0, y0) {
+    tex_idx = [TEX_IDX.bush_00];
+    let dust_anim = new SimpleAnimatedObject(true, tex_idx, x0, y0);
+    return dust_anim;
+}
+
+function createCactus(x0, y0) {
+    tex_idx = [TEX_IDX.cactus_0];
+    let dust_anim = new SimpleAnimatedObject(true, tex_idx, x0, y0);
     return dust_anim;
 }
 
@@ -138,6 +172,9 @@ class Game {
     blocks = [];
 
     animated = [];
+
+    static_details = [];
+
     constructor(W, H) {
         this.W = W;
         this.H = H;
@@ -156,8 +193,38 @@ class Game {
         this.blocks = [
             [-4, 0, 4, 1],
             [-2, -5, 2, -4],
-            [-15, -7, -10, -6]
+            [-15, -7, -10, -6],
+            [10, -7, 15, -6],
+            [-4, -12, 4, -11]
         ];
+
+        for (let block of this.blocks) {
+            let bx0, bx1, by0, by1;
+            [bx0, by0, bx1, by1] = block;
+            let len = bx1 - bx0 - 3;
+            let cur_dx = (91 * Math.abs(bx0 + 5 * by1)) % len;
+            if (cur_dx >= len / 2) {
+                cur_dx += 1;
+            }
+
+            let bush_flag = false;
+
+            if (((bx1 * 61 + by1 * 52) % 13) % 2 != 1) {
+                bush_flag = true;
+                this.static_details.push(createBush((bx0 + cur_dx) * CELL_SZ, by0 * CELL_SZ - CELL_SZ));
+            }
+
+            if (((bx1 * 61 + by1 * 52) % 17) % 3 == 1) {
+                let cur_dx2 = (57 * Math.abs(6 * bx1 + 5 * by0)) % len;
+                if (cur_dx2 >= len / 2) {
+                    cur_dx2 += 1;
+                }
+
+                if (!bush_flag || Math.abs(cur_dx2 - cur_dx) >= 2) {
+                    this.static_details.push(createCactus((bx0 + cur_dx2) * CELL_SZ, by0 * CELL_SZ - 2 * CELL_SZ));
+                }
+            }
+        }
 
         this.camera = new Camera();
     }
@@ -284,8 +351,6 @@ class Game {
 
         let p1x0 = x1, p1x1 = x1 + P_W, p1y0 = y1, p1y1 = y1 + P_H;
 
-        let CELL_SZ = 16;
-
         this.player.jumping = 1;
 
         for (let block of this.blocks) {
@@ -324,6 +389,11 @@ class Game {
 
         this.player.x = x1;
         this.player.y = y1;
+
+        if (this.player.y > 64) {
+            this.player = new Player("player", -8, -32);
+        }
+
         this.player.vx = dx;
         this.player.vy = dy;
     }
@@ -440,7 +510,6 @@ class Game {
         // render_info = [
         //     [TEX_IDX.bear, 0, 0, 0]
         // ];
-        let CELL_SZ = 16;
 
         let render_info = [];
 
@@ -474,6 +543,16 @@ class Game {
             let tex_id = anim.getTexIdx();
 
             render_info.push([tex_id, ax, ay, -1]);
+        }
+
+        for (let anim of this.static_details) {
+            let ax, ay;
+            // console.log(anim);
+            // console.log(anim.getCoords());
+            [ax, ay] = anim.getCoords();
+            let tex_id = anim.getTexIdx();
+
+            render_info.push([tex_id, ax, ay, 1]);
         }
 
         // console.log(render_info);

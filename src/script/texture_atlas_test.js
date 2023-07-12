@@ -41,7 +41,9 @@ async function test() {
         ["dust_00", "src/img/dust_00.png"],
         ["dust_01", "src/img/dust_01.png"],
         ["dust_02", "src/img/dust_02.png"],
-        ["dust_03", "src/img/dust_03.png"]
+        ["dust_03", "src/img/dust_03.png"],
+        ["bush_00", "src/img/desert_bush.png"],
+        ["cactus_0", "src/img/cactus_0.png"]
     ];
 
     urls = [];
