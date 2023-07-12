@@ -140,25 +140,86 @@ class Camera {
     }
 }
 
-const KEY = { left: 37, up: 38, right: 39, down: 40 };
+// const KEY = {
+//     left: 37,
+//     up: 38,
+//     right: 39,
+//     down: 40,
+//     w: 87,
+//     a: 65,
+//     s: 83,
+//     d: 68
+// };
+
+const KEY = {
+    37: "left",
+    38: "up",
+    39: "right",
+    40: "down",
+    87: "w",
+    65: "a",
+    83: "s",
+    68: "d"
+};
+
+var KEY_VALUES = Object.keys(KEY);
+
+const KEY_TO_CONTROL = {
+    left: "left",
+    right: "right",
+    up: "up",
+    down: "down",
+    w: "up",
+    a: "left",
+    s: "down",
+    d: "right"
+};
+
+const CONTROL = {
+    left: 0,
+    up: 1,
+    right: 2,
+    down: 3
+};
 
 // const KEY_IDX = {left: 0, up: 1, right: 2, down: 3};
 
 let key_state = {};
 
+let control_state = {};
+
 function keyHandler(event, state) {
     // console.log("KEY_EVENT");
-    if (getDictValues(KEY).includes(event.keyCode)) {
+    let kcode = event.keyCode.toString();
+    if (KEY_VALUES.includes(kcode)) {
         key_state[event.keyCode] = state;
+        control_state[CONTROL[KEY_TO_CONTROL[KEY[kcode]]]] = state;
+        console.log(event.keyCode);
+        console.log(key_state[event.keyCode]);
     }
 }
 
 function keyDownHandler(event) {
+    if (event.repeat) return;
+    console.log(event.keyCode);
+    console.log(KEY_VALUES);
     keyHandler(event, true);
+    console.log(key_state);
 }
 
 function keyUpHandler(event) {
     keyHandler(event, false);
+}
+
+function refreshControls() {
+    for (const value of KEY_VALUES) {
+        key_state[value] = false;
+        // console.log(value);
+    }
+
+    for (const value of getDictValues(CONTROL)) {
+        control_state[value] = false;
+    }
 }
 
 class Game {
@@ -233,27 +294,15 @@ class Game {
         document.addEventListener("keydown", keyDownHandler, false);
         document.addEventListener("keyup", keyUpHandler, false);
 
-        for (const value of getDictValues(KEY)) {
-            key_state[value] = false;
-            // console.log(value);
-        }
+        refreshControls();
 
         document.getElementById("canvas").addEventListener("focusout", (event) => {
-            for (let key in key_state) {
-                key_state[key] = false;
-            }
-            console.log(key_state);
+            refreshControls();
         });
 
-        document.addEventListener( 'visibilitychange' , function() {
-            if (document.hidden) {
-                for (let key in key_state) {
-                    key_state[key] = false;
-                }
-            } else {
-                // console.log('well back');
-            }
-        }, false )
+        document.addEventListener('visibilitychange' , function() {
+            refreshControls();
+        }, false);
     }
 
     startPhysics() {
@@ -282,10 +331,10 @@ class Game {
             this.player.jump_cd -= 1;
         }
 
-        if (key_state[KEY.left]) {
+        if (control_state[CONTROL.left]) {
             this.player.direction = 1;
             dx = -3;
-        } else if (key_state[KEY.right]) {
+        } else if (control_state[CONTROL.right]) {
             this.player.direction = 0;
             dx = 3;
         } else {
@@ -300,7 +349,8 @@ class Game {
                 dx = 0;
             }
         }
-        if (key_state[KEY.up]) {
+        if (control_state[CONTROL.up]) {
+            control_state[CONTROL.up] = false;
             // TODO: JUMP
             if (this.player.jump_cd <= 0 && this.player.jump_count > 0) {
                 // console.log(this.player.jump_cd, this.player.jump_count);
@@ -309,7 +359,7 @@ class Game {
                 if (this.player.jump_count == 0) {
                     this.player.air_y = this.player.y;
                 }
-                this.player.jump_cd = 20;
+                this.player.jump_cd = 0;
                 this.addDust(x0, y0 + 16);
             }
         }
@@ -390,8 +440,9 @@ class Game {
         this.player.x = x1;
         this.player.y = y1;
 
-        if (this.player.y > 64) {
+        if (this.player.y > 80) {
             this.player = new Player("player", -8, -32);
+            this.camera = new Camera();
         }
 
         this.player.vx = dx;
@@ -414,32 +465,43 @@ class Game {
         let dx = tx - x;
         let dy = ty - y;
 
-        let min_dx = 112;
-        let min_dy = 64;
+        let min_dx = 192;
+        let min_dx2 = min_dx + 48;
+        let min_dy = 80;
+        let min_dy2 = min_dy + 48;
 
         // let max_vx = 1.5;
         // let max_vy = 1.5;
 
-        let max_vx = 1;
-        let max_vy = 1;
+        let max_vx = 5;
+        let max_vy = 5;
 
         let x1, y1;
 
-        if (Math.abs(dx) > 1.5 * min_dx) {
-            max_vx = 2;
-        }
-        if (Math.abs(dy) > 1.5 * min_dy) {
-            max_vy = 2;
+        if (Math.abs(dx) < min_dx2) {
+            max_vx = 1;
         }
 
+        if (dy > -min_dy2 && dy < min_dy2) {
+            max_vy = 1;
+        } 
+
+        // if (Math.abs(dx) > 1.5 * min_dx) {
+        //     max_vx = 2;
+        // }
+        // if (Math.abs(dy) > 1.5 * min_dy) {
+        //     max_vy = 2;
+        // }
+
         if (Math.abs(dx) > min_dx) {
-            dx = dx / 5;
+            dx /= 5;
         } else {
             dx = 0;
         }
 
-        if (dy < -min_dy || dy > 0) {
-            dy = dy / 5;
+        // dy < -min_dy || dy > 0
+        if (Math.abs(dy) > min_dy) {
+            dy /= 5;
         } else {
             dy = 0;
         }
@@ -458,8 +520,14 @@ class Game {
             dy = -max_vy;
         }
 
+        dx = (dx + 10 * vx) / 11;
+        dy = (dy + 10 * vy) / 11;
+
         this.camera.x = x + dx;
         this.camera.y = y + dy;
+
+        this.camera.vx = dx;
+        this.camera.vy = dy;
     }
 
     stepPhysics() {
@@ -515,8 +583,8 @@ class Game {
 
         let player = this.player;
 
-        let p_x = Math.round(player.x);
-        let p_y = Math.round(player.y);
+        let p_x = Math.round(player.x * 2) / 2;
+        let p_y = Math.round(player.y * 2) / 2;
 
         // console.log("Player: " + p_x + " " + p_y);
 
@@ -561,6 +629,6 @@ class Game {
     }
 
     getCameraState() {
-        return [Math.round(this.camera.x), Math.round(this.camera.y)];
+        return [Math.round(this.camera.x * 2) / 2, Math.round(this.camera.y * 2) / 2];
     }
 };

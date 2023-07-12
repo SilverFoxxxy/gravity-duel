@@ -128,6 +128,9 @@ class WebGLContext {
 
         var gl = this.gl;
 
+        gl.clearColor(48/255, 48/255, 48/255, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
         // if (tex.webGLtexture){
         //     gl.activeTexture(gl.TEXTURE0);
         //     gl.bindTexture(gl.TEXTURE_2D,tex.webGLtexture);

@@ -10,8 +10,11 @@ async function start() {
         console.log('canvas failed');
         return;
     }
-    canvas.width  = 320 * 2;
-    canvas.height = 320;
+
+    var SCALE_K = 2;
+
+    canvas.width  = 400 * 2 * SCALE_K;
+    canvas.height = 400 * SCALE_K;
 
     var gl;
     try {
@@ -21,10 +24,10 @@ async function start() {
         return false;
     }
 
-    HEIGHT = 320;
-    WIDTH = 320 * 2;
+    HEIGHT = 400;
+    WIDTH = 400 * 2;
 
-    DEPTH = 100;
+    DEPTH = 128;
 
     tex_urls = [
         ["player_0", "src/img/cowboy_0.png"],
