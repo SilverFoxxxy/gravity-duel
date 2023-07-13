@@ -360,6 +360,8 @@ class Game {
                     this.player.air_y = this.player.y;
                 }
                 this.player.jump_cd = 0;
+
+                play_audio("jump_swoosh");
                 this.addDust(x0, y0 + 16);
             }
         }
@@ -422,6 +424,7 @@ class Game {
                     this.player.jump_count = 2;
                     this.player.jumping = 0;
                     if (dy0 >= max_vy * (2 / 3)) {
+                        play_audio("landing_swoosh");
                         this.addDust(x0, by0 - 16);
                     }
                     dy = 0;

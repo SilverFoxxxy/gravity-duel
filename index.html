@@ -12,6 +12,23 @@
 
 <canvas id="canvas">Your browser does not seem to support canvases.</canvas>
 
+<script>
+  function play_audio(audio_id) {
+    let t0 = Date.now();
+    var audio = document.getElementById(audio_id).cloneNode();
+    let t1 = Date.now();
+    console.log(t1 - t0);
+    audio.play();
+  }
+</script>
+
+<!-- <input type="button" value="PLAY" onclick="play()"> -->
+
+<audio id="jump_swoosh" src="src/snd/jump-swoosh.mp3" type="audio/mp3">
+</audio>
+<audio id="landing_swoosh" src="src/snd/landing-swoosh.mp3" type="audio/mp3">
+</audio>
+
 
 </body>
 
