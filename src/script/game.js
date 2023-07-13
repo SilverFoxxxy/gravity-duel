@@ -194,17 +194,17 @@ function keyHandler(event, state) {
     if (KEY_VALUES.includes(kcode)) {
         key_state[event.keyCode] = state;
         control_state[CONTROL[KEY_TO_CONTROL[KEY[kcode]]]] = state;
-        console.log(event.keyCode);
-        console.log(key_state[event.keyCode]);
+        // console.log(event.keyCode);
+        // console.log(key_state[event.keyCode]);
     }
 }
 
 function keyDownHandler(event) {
     if (event.repeat) return;
-    console.log(event.keyCode);
-    console.log(KEY_VALUES);
+    // console.log(event.keyCode);
+    // console.log(KEY_VALUES);
     keyHandler(event, true);
-    console.log(key_state);
+    // console.log(key_state);
 }
 
 function keyUpHandler(event) {

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="src/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="src/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="src/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <script src="src/script/rect.js"></script>
     <script src="src/script/texture_atlas.js"></script>
     <script src="src/script/webgl_lib.js"></script>
@@ -13,11 +21,11 @@
 <canvas id="canvas">Your browser does not seem to support canvases.</canvas>
 
 <script>
-  function play_audio(audio_id) {
+  async function play_audio(audio_id) {
     let t0 = Date.now();
     var audio = document.getElementById(audio_id).cloneNode();
+    audio.volume = 0.2;
     let t1 = Date.now();
-    console.log(t1 - t0);
     audio.play();
   }
 </script>
@@ -26,7 +34,7 @@
 
 <audio id="jump_swoosh" src="src/snd/jump-swoosh.mp3" type="audio/mp3">
 </audio>
-<audio id="landing_swoosh" src="src/snd/landing-swoosh.mp3" type="audio/mp3">
+<audio id="landing_swoosh" src="src/snd/landing-swoosh-2.mp3" type="audio/mp3">
 </audio>
 
 
