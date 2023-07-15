@@ -415,11 +415,7 @@ class Game {
             // console.log(bx0, by0, x0, y0);
             if (Math.max(bx0, p1x0) < Math.min(bx1, p1x1) &&
                 Math.max(by0, p1y0) <= Math.min(by1, p1y1)) {
-                if (px1 <= bx0) {
-                    x1 = Math.min(x1, bx0 - P_W);
-                    dx = 0;
-                }
-                if (py1 <= by0) {
+                if (py1 <= by0 && px1 >= bx0 && px0 <= bx1) {
                     y1 = Math.min(y1, by0 - P_H);
                     this.player.jump_count = 2;
                     this.player.jumping = 0;
@@ -428,10 +424,15 @@ class Game {
                         this.addDust(x0, by0 - 16);
                     }
                     dy = 0;
-                }
-                if (px0 >= bx1) {
-                    x1 = Math.max(x1, bx1);
+                } else {
+                    if (px1 <= bx0) {
+                    x1 = Math.min(x1, bx0 - P_W);
                     dx = 0;
+                    }
+                    if (px0 >= bx1) {
+                        x1 = Math.max(x1, bx1);
+                        dx = 0;
+                    }
                 }
                 if (py0 >= by1) {
                     y1 = Math.max(y1, by1);
