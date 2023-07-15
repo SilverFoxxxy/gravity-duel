@@ -1,3 +1,11 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="github-markdown-dark.css">
+<link rel="stylesheet" href="github-markdown-custom.css">
+
+<article class="markdown-body">
+
+
 # Server tech doc
 
 Solves synchronization problems
@@ -34,43 +42,44 @@ Solves synchronization problems
         - **client** only ***predicts*** itself controls state (before he gets **state_2** from **server**)
 
 <img
-  src="src/img/server/server_only.svg"
+  src="src/img/server-dark/server_only.svg"
   alt="triangle with all three sides equal"/>
 
 ## Client
 
 <img
-  src="src/img/server/client_only.svg"
+  src="src/img/server-dark/client_only.svg"
   alt="triangle with all three sides equal"/>
 
 ## Client-Server interaction
 ### 1. Client state disproved
 <img
-  src="src/img/server/client_disproved.svg"
+  src="src/img/server-dark/client_disproved.svg"
   alt="triangle with all three sides equal"
-  style="max-height:40vw;"/>
+  style="height:50vh; max-height: calc(900px * 1);"/>
 
 ### 2. Client state approved
 
 <img
-  src="src/img/server/client_approved.svg"
+  src="src/img/server-dark/client_approved.svg"
   alt="triangle with all three sides equal"
-  style="max-height:40vw;"/>
+  style="height:50vh; max-height: calc(900px * 1);"/>
 
 ### 3. Client state outdated
 
 <img
-  src="src/img/server/client_outdated.svg"
+  src="src/img/server-dark/client_outdated.svg"
   alt="triangle with all three sides equal"
-  style="max-height:40vw;"/>
+  style="height:50vh; max-height: calc(900px * 1);"/>
 
 <details>
 <summary><big>Full Diagram</big></summary>
 
 <img
-  src="src/img/server_diagram.svg"
+  src="src/img/server-dark/server.svg"
   alt="triangle with all three sides equal"/>
 
 </details>
 
 
+</article>

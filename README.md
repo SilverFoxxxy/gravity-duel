@@ -3,16 +3,21 @@
 Online multiplayer 2d game
 
 
-## Table of Contents
-- [Game Design Document](docs/game-design-doc.md)
-- [Multiplayer Server Arch](docs/server-multiplayer.md)
+
 
 ## Current version
 - Available at [belkovanya.site/gravity-duel](https://belkovanya.site/gravity-duel/)
 
+
 ---
 ![alt text](docs/src/img/screenshot.png)
 ---
+
+## Table of Contents
+Links to documentation on my site
+
+- [Game Design Document](https://belkovanya.site/gravity-duel/docs/gdd.html)
+- [Multiplayer Server Arch](https://belkovanya.site/gravity-duel/docs/server-doc.html)
 
 ## Tech stack
 JS, WebGL, Node.js

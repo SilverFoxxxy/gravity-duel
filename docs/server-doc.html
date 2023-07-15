@@ -1,0 +1,85 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="github-markdown-dark.css">
+<link rel="stylesheet" href="github-markdown-custom.css">
+<article class="markdown-body">
+<h1>Server tech doc</h1>
+<p>Solves synchronization problems</p>
+<h1>Concept</h1>
+<p><em>Basic idea:</em></p>
+<ul>
+<li>
+<p><strong>Authoritorian server</strong></p>
+<p>(Everything happens <em><strong>on server only</strong></em>)</p>
+</li>
+<li>
+<p>Player sends <em><strong>keys input</strong></em> to server</p>
+</li>
+<li>
+<p>Server sends <em><strong>game state</strong></em> to player</p>
+</li>
+</ul>
+<p><em>Important:</em></p>
+<ul>
+<li>
+<p>Server <em><strong>does not care</strong></em> about client</p>
+<p><em>(Almost)</em></p>
+</li>
+</ul>
+<p><em>Improvement N1:</em></p>
+<ul>
+<li>
+<p>Client <em><strong>predicts</strong></em> next states</p>
+</li>
+<li>
+<p>Server sends <em><strong>game state</strong></em> -&gt;</p>
+<p>-&gt; client <em><strong>compares</strong></em> it with prediction</p>
+</li>
+</ul>
+<h1>1 Client Architecture</h1>
+<h2>Server</h2>
+<ul>
+<li><strong>state_5</strong> - <em>game state</em> number <em>5</em> <strong>produced by server</strong></li>
+<li><strong>pstate_5</strong> - <em>game state</em> number <em>5</em> <strong>predicted by client</strong></li>
+<li><strong>ctrl_2</strong> - <em>controls state</em> before calculating:
+<ul>
+<li><strong>state_2</strong> (on <strong>server</strong>)</li>
+<li><strong>pstate_2</strong> (on <strong>client</strong>)</li>
+<li><strong>ctrl_2</strong> is <em><strong>different</strong></em> for <strong>server</strong> and for <strong>client</strong>:
+<ul>
+<li><strong>client</strong> only <em><strong>predicts</strong></em> itself controls state (before he gets <strong>state_2</strong> from <strong>server</strong>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img
+  src="src/img/server-dark/server_only.svg"
+  alt="triangle with all three sides equal"/></p>
+<h2>Client</h2>
+<p><img
+  src="src/img/server-dark/client_only.svg"
+  alt="triangle with all three sides equal"/></p>
+<h2>Client-Server interaction</h2>
+<h3>1. Client state disproved</h3>
+<p><img
+  src="src/img/server-dark/client_disproved.svg"
+  alt="triangle with all three sides equal"
+  style="height:50vh; max-height: calc(900px * 1);"/></p>
+<h3>2. Client state approved</h3>
+<p><img
+  src="src/img/server-dark/client_approved.svg"
+  alt="triangle with all three sides equal"
+  style="height:50vh; max-height: calc(900px * 1);"/></p>
+<h3>3. Client state outdated</h3>
+<p><img
+  src="src/img/server-dark/client_outdated.svg"
+  alt="triangle with all three sides equal"
+  style="height:50vh; max-height: calc(900px * 1);"/></p>
+<details>
+<summary><big>Full Diagram</big></summary>
+<p><img
+  src="src/img/server-dark/server.svg"
+  alt="triangle with all three sides equal"/></p>
+</details>
+</article>

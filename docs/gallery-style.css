@@ -10,6 +10,7 @@
     .elem {
         display: block;
         height: 18vw;
+        max-height: calc(900px * 0.18);
         /* margin: auto; */
         width:100%;
         /* height:100%; */
@@ -33,6 +34,7 @@
     .elem-h {
         /* width:100%; */
         height: 17vw;
+        max-height: calc(900px * 0.17);
         margin: auto;
         width: auto;
         object-fit: cover;
