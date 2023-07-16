@@ -11,16 +11,12 @@
 [gdd manual video I used as reference](https://www.youtube.com/watch?v=xccxmytvnC4)
 
 ## Table of Contents
-- [Gravity Duel GDD](#gravity-duel-gdd)
-  - [Table of Contents](#table-of-contents)
-  - [Current version](#current-version)
-  - [](#)
-  - [Concept](#concept)
-      - [TODO: Synopsis](#todo-synopsis)
-  - [Controls](#controls)
-  - [Style of the Game](#style-of-the-game)
-    - [Design:](#design)
-  - [Gameplay](#gameplay)
+- [Table of Contents](#table-of-contents)
+- [Current version](#current-version)
+- [Concept](#concept)
+- [Controls](#controls)
+- [Style of the Game](#style-of-the-game)
+- [Gameplay](#gameplay)
 
 
 ## Current version
@@ -64,14 +60,17 @@ Similar: Brawhalla
 <h3> Map </h3>
 <div class="wrapper">
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/gangfort2.png" alt="Sample photo">
         <div class="overlay"><span>Gangfort</span></div>
     </div>
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/img4.jpg" alt="Sample photo">
         <div class="overlay"><span>Brawhalla</span></div>
     </div>
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/expendabros.jpg" alt="Sample photo">
         <div class="overlay"><span>Expendabros</span></div>
     </div>
@@ -80,14 +79,17 @@ Similar: Brawhalla
 <h3> Attack </h3>
 <div class="wrapper">
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/img2.jpg" alt="Sample photo">
         <div class="overlay"><span>Brawhalla</span></div>
     </div>
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/expendabros1.jpg" alt="Sample photo">
         <div class="overlay"><span>Expendabros</span></div>
     </div>
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/img5.jpg" alt="Sample photo">
         <div class="overlay"><span>Ha-do-ken</span></div>
     </div>
@@ -96,19 +98,33 @@ Similar: Brawhalla
 
 <h3>Character</h3>
 <div class="wrapper">
-    <img class="elem-h" src="src/img/style-gallery/img0.jpg" alt="Sample photo">
-    <img class="elem-h pixel" src="src/img/style-gallery/cowboy_0jr.png" alt="Sample photo">
-    <img class="elem-h" src="src/img/style-gallery/cactus_collage_2.png" alt="Sample photo">
+    <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
+        <img class="elem-h" src="src/img/style-gallery/img0.jpg" alt="Sample photo">
+        <div class="overlay"><span>Sayonara.mp3</span></div>
+    </div>
+    <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
+        <img class="elem-h pixel" src="src/img/style-gallery/cowboy_0jr.png" alt="Sample photo">
+        <div class="overlay"><span>1st game sprite</span></div>
+    </div>
+    <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
+        <img class="elem-h" src="src/img/style-gallery/cactus_collage_2.png" alt="Sample photo">
+        <div class="overlay"><span>cactus</span></div>
+    </div>
 </div>
 
 <h3>Interface / Interior</h3>
 
 <div class="wrapper">
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/gangfort.jpg" alt="Sample photo">
         <div class="overlay"><span>Gangfort</span></div>
     </div>
     <div class="elem-frame">
+        <input type="checkbox" class="toggle-button"/>
         <img class="elem" src="src/img/style-gallery/hero_ring.jpg" alt="Sample photo">
         <div class="overlay"><span>Hero Ring</span></div>
     </div>

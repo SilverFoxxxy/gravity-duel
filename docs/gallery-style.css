@@ -1,20 +1,48 @@
 * {
   box-sizing: border-box;
 }
+button {
+  border: none;
+  padding: 0;
+}
+input, input:checked {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+}
     img {
+      max-width: 100%;
         /* width: 100%;
         width: auto; */
         /* max-height: 100%; */
     }
 
+    .small-img {
+      display: block;
+      width:auto;
+      max-width: 100%;
+      height:35vh;
+      object-fit: contain;
+    }
+
+    .img-frame {
+      height:35vh;
+      width: fit-content;
+      width: -moz-fit-content;
+      min-width: 10vw;
+      position: relative;
+    }
+
     .elem {
         display: block;
-        height: 18vw;
+        height: 16vw;
         max-height: calc(900px * 0.18);
         /* margin: auto; */
         width:100%;
         /* height:100%; */
         object-fit: cover;
+        /* border: 1px solid red; */
 
         /* border: 1px solid white; */
         
@@ -23,27 +51,104 @@
         max-width: 100%; */
     }
 
+    .elem-h {
+      /* width:100%; */
+      height: 16vw;
+      max-height: calc(900px * 0.18);
+      width: 100%;
+      margin: auto;
+      object-fit: contain;
+      object-position: 50% 50%;
+      /* outline: 1px solid red; */
+      /* height: 100%;
+      min-width: 100%;
+      max-width: 100%; */
+  }
+
+  .pixel {image-rendering: pixelated;}
+
     .elem-frame {
+        /* appearance: none;
+        border: none; */
+        /* background-size: cover; */
         position: relative;
         width: 100%;
         height: 100%;
+        height: 16vw;
+        max-height: calc(900px * 0.18);
+        vertical-align: auto;
         /* border: 1px solid red; */
         background: black;
     }
 
-    .elem-h {
-        /* width:100%; */
-        height: 17vw;
-        max-height: calc(900px * 0.17);
-        margin: auto;
-        width: auto;
-        object-fit: cover;
-        /* height: 100%;
-        min-width: 100%;
-        max-width: 100%; */
+    .elem-frame::after, .img-frame::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      content:"🔍";
+      color:#ddd;
+      opacity: 0;
+      font-size: 0;
+      transition: all 0.3s 0.1s ease-in-out;
+      margin-left: 0;
     }
 
-    .pixel {image-rendering: pixelated;}
+    .elem-frame:hover::after, .img-frame:hover::after {
+      font-size: 1rem;
+      opacity: 1;
+      transition: all 0.2s 0.1s ease-in-out;
+    }
+
+    .toggle-button {
+      position:absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 10;
+    
+    }
+
+    .toggle-button:checked {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 12;
+    }
+
+    /* .elem, .elem-h, .small-img {
+      transition: height 0.2s ease-in-out;
+      transition: width 0.2s ease-in-out;
+    } */
+
+    .toggle-button:checked + .elem, .toggle-button:checked + .elem-h, .toggle-button:checked + img {
+      /* outline: 10vh rgba(57, 57, 57, 0.502); */
+      position: fixed;
+      object-fit: contain;
+      top: calc(max(5vh, calc((100vh - 90vw) / 2)));
+      /* bottom: 5vh;
+      top: 0;
+      bottom: 0; */
+      /* margin: auto; */
+      left: 5vw;
+      vertical-align: middle;
+      height: 90vh;
+      max-height: 90vw;
+      width: 100vw;
+      max-width:90vw;
+      padding: 0;
+      margin: 0;
+      
+      outline: 1px solid #822;
+      z-index: 11;
+    }
+
+    .toggle-button:checked + .elem-frame::after, .toggle-button:checked + .img-frame::after {
+      font-size: 0;
+      transition: none;
+    }
 
   .wrapper {
     width: 100%;
@@ -54,20 +159,32 @@
 
   .overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 101%;
+    height: 101%;
     background: rgba(57, 57, 57, 0.502);
-    top: 0;
+    bottom: 0;
     left: 0;
     transform: scale(0);
-    transition: all 0.2s 0.1s ease-in-out;
+    transition: all 0.2s 0.1s ease-in;
     color: #fff;
+    /* transition: none; */
     /* border-radius: 5px; */
     /* center overlay content */
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
+  /* .toggle-button:checked ~ .overlay {
+    all: none;
+    top:auto;
+    transition: none;
+    height: 2rem;
+    position: fixed;
+    z-index: 11;
+    bottom: 0;
+    left: 0;
+  } */
   
   /* hover */
   .wrapper .elem-frame:hover .overlay {

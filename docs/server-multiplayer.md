@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="github-markdown-dark.css">
 <link rel="stylesheet" href="github-markdown-custom.css">
+<link rel="stylesheet" href="gallery-style.css">
 
 <article class="markdown-body">
 
@@ -41,43 +42,58 @@ Solves synchronization problems
     - **ctrl_2** is ***different*** for **server** and for **client**:
         - **client** only ***predicts*** itself controls state (before he gets **state_2** from **server**)
 
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
   src="src/img/server-dark/server_only.svg"
   alt="triangle with all three sides equal"/>
+</div>
 
 ## Client
 
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
   src="src/img/server-dark/client_only.svg"
   alt="triangle with all three sides equal"/>
+</div>
 
 ## Client-Server interaction
 ### 1. Client state disproved
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
   src="src/img/server-dark/client_disproved.svg"
-  alt="triangle with all three sides equal"
-  style="height:50vh; max-height: calc(900px * 1);"/>
+  alt="triangle with all three sides equal"/>
+</div>
 
 ### 2. Client state approved
 
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
   src="src/img/server-dark/client_approved.svg"
-  alt="triangle with all three sides equal"
-  style="height:50vh; max-height: calc(900px * 1);"/>
+  alt="triangle with all three sides equal"/>
+</div>
 
 ### 3. Client state outdated
 
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+<img class="small-img"
   src="src/img/server-dark/client_outdated.svg"
-  alt="triangle with all three sides equal"
-  style="height:50vh; max-height: calc(900px * 1);"/>
+  alt="triangle with all three sides equal"/>
+</div>
 
 <details>
 <summary><big>Full Diagram</big></summary>
 
-<img
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
   src="src/img/server-dark/server.svg"
   alt="triangle with all three sides equal"/>
+</div>
 
 </details>
 
