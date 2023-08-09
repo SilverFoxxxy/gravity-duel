@@ -51,10 +51,19 @@ Solves synchronization problems
 
 ## Client
 
+### Prediction system
 <div class="img-frame">
     <input type="checkbox" class="toggle-button"/>
     <img class="small-img"
   src="src/img/server-dark/client_only.svg"
+  alt="triangle with all three sides equal"/>
+</div>
+
+### Render system
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+    <img class="small-img"
+  src="src/img/server-dark/client_render.svg"
   alt="triangle with all three sides equal"/>
 </div>
 
@@ -85,7 +94,27 @@ Solves synchronization problems
   alt="triangle with all three sides equal"/>
 </div>
 
-<details>
+### 4. Client state is too far in future
+
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+<img class="small-img"
+  src="src/img/server-dark/too_predicted.svg"
+  alt="triangle with all three sides equal"/>
+</div>
+
+
+### 5. Disconnected
+
+<div class="img-frame">
+    <input type="checkbox" class="toggle-button"/>
+<img class="small-img"
+  src="src/img/server-dark/no_connection.svg"
+  alt="triangle with all three sides equal"/>
+</div>
+
+
+<!-- <details open>
 <summary><big>Full Diagram</big></summary>
 
 <div class="img-frame">
@@ -95,7 +124,7 @@ Solves synchronization problems
   alt="triangle with all three sides equal"/>
 </div>
 
-</details>
+</details> -->
 
 
 </article>
